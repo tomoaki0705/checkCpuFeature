@@ -10,8 +10,10 @@
 
 #ifdef __aarch64__
 const int cFill = 16;
+typedef Elf64_auxv_t AUXV_t;
 #elif defined( __arm__ )
 const int cFill = 8;
+typedef Elf32_auxv_t AUXV_t;
 #endif
 
 const char CPUINFO[] = "cat /proc/cpuinfo";
@@ -25,7 +27,7 @@ void dumpAuxv(bool format = false)
 
 	if (cpufile >= 0)
 	{
-		Elf32_auxv_t auxv;
+		AUXV_t auxv;
 		const size_t size_auxv_t = sizeof(auxv);
 		using namespace std;
 		{
